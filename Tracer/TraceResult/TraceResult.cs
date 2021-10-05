@@ -56,18 +56,6 @@ namespace Tracer
             throw new KeyNotFoundException("Failed to get MethodResult for method "); // todo insert method name
         }
 
-        public ThreadResult GetThreadById(int id)
-        {
-            foreach(ThreadResult thread in Threads)
-            {
-                if (thread.ThreadId == id)
-                {
-                    return thread;
-                }
-            }
-            throw new KeyNotFoundException("Failed to get ThreadResult for thread with id "); // todo insert thread id
-        }
-
         public void AddMethod(StackTrace trace)
         {
             lock(locker)

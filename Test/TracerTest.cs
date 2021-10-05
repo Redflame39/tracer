@@ -68,16 +68,5 @@ namespace Test
             Assert.AreEqual(expected, actual, 15.0);
         }
 
-        [Test]
-        public void ResultThreadHasCorrectExecutionTimeTest()
-        {
-            long expected = _testClass.AnotherInnerMethod1SleepTime 
-                + _testClass.AnotherInnerMethod2SleepTime 
-                + _testClass.InnerMethod1SleepTime 
-                + _testClass.InnerMethod2SleepTime;
-            ThreadResult thread = _traceResult.GetThreadById(1);
-            long actual = thread.ExecutionTime;
-            Assert.AreEqual(expected, actual, 1000.0);
-        }
     }
 }
