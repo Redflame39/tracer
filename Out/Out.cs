@@ -2,6 +2,7 @@
 using Out.TestClasses;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,13 @@ namespace Out
             TraceResult result = timeTracer.GetTraceResult();
             ISerializer serializer = new JsonResultSerializer();
             string resultXml = serializer.Serialize(result);
-            Writer.WriteData(Console.Out, resultXml);
+            //Writer.WriteData(Console.Out, resultXml);
+
+            string writePath = "../result.txt";
+            using (StreamWriter writer = new StreamWriter(writePath))
+            {
+                Writer.WriteData(writer, resultXml);
+            }
         }
     }
 }
