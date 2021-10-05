@@ -6,12 +6,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using Tracer;
 
-namespace Tracer.TestClasses
+namespace Out.TestClasses
 {
     public class TestClass
     {
 
         private ITracer _tracer;
+
+        public int InnerMethod1SleepTime { get; set; }
+
+        public int InnerMethod2SleepTime { get; set; }
+
+        public int AnotherInnerMethod1SleepTime { get; set; }
+
+        public int AnotherInnerMethod2SleepTime { get; set; }
+
+        public int AnotherThreadMethodSleepTime { get; set; }
 
         public TestClass(ITracer tracer)
         {
@@ -21,6 +31,7 @@ namespace Tracer.TestClasses
         public void StartMethod()
         {
             AnotherThread anotherThread = new AnotherThread(_tracer);
+            anotherThread.EndChainMethodSleepTime = AnotherThreadMethodSleepTime;
             Thread thread = new Thread(new ThreadStart(anotherThread.AnotherThreadMethod));
             thread.Start();
             Method();
@@ -47,28 +58,28 @@ namespace Tracer.TestClasses
         private void InnerMethod1()
         {
             _tracer.StartTrace();
-            Thread.Sleep(100);
+            Thread.Sleep(InnerMethod1SleepTime);
             _tracer.StopTrace();
         }
 
         private void InnerMethod2()
         {
             _tracer.StartTrace();
-            Thread.Sleep(200);
+            Thread.Sleep(InnerMethod2SleepTime);
             _tracer.StopTrace();
         }
 
         private void AnotherInnerMethod1()
         {
             _tracer.StartTrace();
-            Thread.Sleep(200);
+            Thread.Sleep(AnotherInnerMethod1SleepTime);
             _tracer.StopTrace();
         }
 
         private void AnotherInnerMethod2()
         {
             _tracer.StartTrace();
-            Thread.Sleep(400);
+            Thread.Sleep(AnotherInnerMethod2SleepTime);
             _tracer.StopTrace();
         }
     }

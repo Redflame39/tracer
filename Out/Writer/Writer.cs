@@ -9,9 +9,9 @@ namespace Out
 {
     public class Writer
     {
-        void WriteData(Stream destination, string data)
+        public static void WriteData(TextWriter destination, string data)
         {
-
+            destination.Write(data);
         }
     }
 }

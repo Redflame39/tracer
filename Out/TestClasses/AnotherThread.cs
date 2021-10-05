@@ -6,11 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Tracer;
 
-namespace Tracer.TestClasses
+namespace Out.TestClasses
 {
     public class AnotherThread
     {
         private ITracer _tracer;
+
+        public int EndChainMethodSleepTime { get; set;  }
 
         public AnotherThread(ITracer tracer)
         {
@@ -39,7 +41,7 @@ namespace Tracer.TestClasses
         private void EndChainMethod()
         {
             _tracer.StartTrace();
-            Thread.Sleep(500);
+            Thread.Sleep(EndChainMethodSleepTime);
             _tracer.StopTrace();
         }
     }
